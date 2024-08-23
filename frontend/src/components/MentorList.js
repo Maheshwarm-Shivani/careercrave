@@ -5,8 +5,9 @@ function MentorList() {
   const [mentors, setMentors] = useState([]);
 
   useEffect(() => {
+    const apiUrl = process.env.REACT_APP_API
     axios
-      .get("http://localhost:5000/mentors")
+      .get(`${apiUrl}/mentors`)
       .then((response) => setMentors(response.data))
       .catch((error) => console.error("Error fetching mentors:", error));
   }, []);
