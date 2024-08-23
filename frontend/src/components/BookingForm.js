@@ -7,16 +7,18 @@ function BookingForm() {
   const [duration, setDuration] = useState(0);
 
   useEffect(() => {
+    const apiUrl = process.env.REACT_APP_API_URL; 
     axios
-      .get("http://localhost:5000/mentors")
+      .get(`${apiUrl}/mentors`)
       .then((response) => setMentors(response.data))
       .catch((error) => console.error("Error fetching mentors:", error));
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const apiUrl = process.env.REACT_APP_API_URL;
     axios
-      .post("http://localhost:5000/bookings", {
+      .post(`${apiUrl}/bookings`, {
         student_id: 1, // Hardcoded for simplicity
         mentor_id: selectedMentor,
         booking_time: new Date().toISOString(),
